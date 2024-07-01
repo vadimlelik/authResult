@@ -10,13 +10,10 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    resetToken: {
-        type: String
+    name:{
+      type: String,
+      required: true,
     },
-    token: {
-        type: String,
-    },
-    resetTokenExp: Date,
     post: [
         {
             type: mongoose.Schema.Types.ObjectId,
