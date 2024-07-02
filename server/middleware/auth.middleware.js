@@ -7,6 +7,9 @@ const authMiddleware = (req, res, next) => {
             return res.status(401).send({message: 'Unauthorized'})
         }
         const data = TokenService.validateAccess(token)
+        if (!data) {
+            return res.status(401).send({message: 'token is not valid '})
+        }
         req.user = data
         next()
     } catch (e) {
