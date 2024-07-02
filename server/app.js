@@ -5,6 +5,7 @@ import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 import authRoute from "./route/authRoute.js";
 import postRoute from "./route/postRoute.js";
+import userRoute from "./route/userRoute.js";
 
 
 const app = express();
@@ -15,6 +16,7 @@ dotenv.config()
 
 
 app.use('/api/v1/auth', authRoute);
+app.use('/api/v1/user', userRoute);
 app.use('/api/v1/post', postRoute);
 
 const start = async () => {
