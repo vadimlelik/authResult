@@ -1,7 +1,7 @@
 import {Navigate} from "react-router-dom";
 import LoginPages from "../pages/LoginPages";
 import AuthLayout from "../layout/AuthLayout";
-import SignUp from "../pages/SignUp";
+import SignUpPage from "../pages/SignUpPage";
 import PostLayout from "../layout/PostLayout";
 import PostList from "../components/PostList";
 
@@ -21,13 +21,13 @@ export const routes = (isLoggedIn) => {
                     element: <Navigate to='/auth/signUp'/>,
                 },
                 {
-                    path: "login",
+                    path: "signIn",
                     element: <LoginPages/>
 
                 },
                 {
                     path: "signUp",
-                    element: <SignUp/>,
+                    element: <SignUpPage/>,
                 }
 
             ]

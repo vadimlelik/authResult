@@ -11,7 +11,7 @@ const authServices = {
 
     register: async (payload) => {
         try {
-            const {data} = await httpAuth.post('signIn', payload)
+            const {data} = await httpAuth.post('signUp', payload)
             return data
         } catch (e) {
 
@@ -20,7 +20,7 @@ const authServices = {
 
     login: async (payload) => {
         try {
-            const {data} = await httpAuth.post('signUp', payload)
+            const {data} = await httpAuth.post('signIn', payload)
             return data
         } catch (e) {
 

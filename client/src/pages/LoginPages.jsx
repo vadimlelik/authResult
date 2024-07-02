@@ -1,11 +1,17 @@
 import {useState} from "react";
+import {useDispatch} from "react-redux";
+import {useNavigate} from "react-router-dom";
+import {login} from "../store/authSlice";
+
 
 const LoginPages = () => {
     const [data, setData] = useState({})
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(data)
+        dispatch(login(data, navigate))
     }
 
     const handleChange = (e) => {
@@ -25,8 +31,8 @@ const LoginPages = () => {
                 flexDirection: 'column',
                 alignItems: 'center',
             }}>
-                <input type="text" name='text' placeholder="Email address"/>
-                <input type="password" name='email' placeholder="Password"/>
+                <input type="text" name='email' placeholder="Email address"/>
+                <input type="password" name='password' placeholder="Password"/>
                 <button type="submit" onClick={handleSubmit}>Sign Up</button>
             </form>
         </div>
