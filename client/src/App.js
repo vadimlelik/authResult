@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import withAppStore from "./hoc/withAppStore";
 import {useRoutes} from "react-router-dom";
