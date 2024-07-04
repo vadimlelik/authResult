@@ -36,6 +36,10 @@ export const fetchRole = () => async (dispatch, getState) => {
 	}
 }
 
+export const getRoles = (state) => {
+	return state.role.entities
+}
+
 export const getRolesById = (roleIds) => (state) => {
 	if (state.role.entities && roleIds) {
 		const rolesArray = []
