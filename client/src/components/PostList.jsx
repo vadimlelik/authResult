@@ -1,21 +1,34 @@
-import {useSelector} from "react-redux";
-import {getPostsIsLoading} from "../store/selectors/ index";
-import {getCurrentUserData} from "../store/usersSlice";
+import { useSelector } from 'react-redux'
+import { getPostsIsLoading } from '../store/selectors/ index'
+import { getCurrentUserData } from '../store/usersSlice'
+import { getRolesById } from '../store/roleSlice'
 
 const PostList = () => {
+	const { auth } = useSelector((state) => state.auth)
+	const isLoadingRoles = useSelector((state) => state.role.isLoading)
+	const user = useSelector(getCurrentUserData(auth.userId))
 
-    const {auth} = useSelector((state) => state.auth);
-    const user = useSelector(getCurrentUserData(auth.userId));
-    const isLoading = useSelector(getPostsIsLoading())
+	const rolesArray = useSelector(getRolesById(user?.role))
 
-    if (isLoading) {
-        return <h1>Loading...</h1>;
-    }
+	const isLoading = useSelector(getPostsIsLoading())
 
+	if (isLoading && isLoadingRoles) {
+		return <h1>Loading...</h1>
+	}
 
-    return (
-        <h1>{user?.name}</h1>
-    );
-};
+	return (
+		<div>
+			<h1>{user?.name}</h1>
+			<div>
+				Role
+				<div>
+					{rolesArray.map((role) => (
+						<div key={role._id}>{role.name}</div>
+					))}
+				</div>
+			</div>
+		</div>
+	)
+}
 
 export default PostList
