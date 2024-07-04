@@ -30,6 +30,7 @@ export const authSlice = createSlice({
         authRequestedSuccess: (state, action) => {
             state.isLoading = false
             state.auth.userId = action.payload.userId
+            state.isLoggedIn = true
 
         },
         userLoggedOut: (state,) => {
@@ -73,7 +74,5 @@ export const signup = (payload, navigate) => async (dispatch, getState) => {
 }
 
 
-const getCurrentUserData = () => (state) => {
-    return state.auth.entities ? state.auth.entities.find((users) => users.id === state.auth.entities.userId) : null
-}
+
 

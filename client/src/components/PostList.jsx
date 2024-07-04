@@ -1,10 +1,12 @@
 import {useSelector} from "react-redux";
-import {getPosts, getPostsIsLoading} from "../store/selectors/ index";
+import {getPostsIsLoading} from "../store/selectors/ index";
+import {getCurrentUserData} from "../store/usersSlice";
 
 const PostList = () => {
-    const post = useSelector(getPosts());
-    const isLoading = useSelector(getPostsIsLoading())
 
+    const {auth} = useSelector((state) => state.auth);
+    const user = useSelector(getCurrentUserData(auth.userId));
+    const isLoading = useSelector(getPostsIsLoading())
 
     if (isLoading) {
         return <h1>Loading...</h1>;
@@ -12,14 +14,7 @@ const PostList = () => {
 
 
     return (
-        <ul style={{
-            listStyleType: "none",
-
-        }}>
-            {post.map((post, index) => (<li style={{
-                marginTop: "10px",
-            }} key={index}>{post.title}</li>))}
-        </ul>
+        <h1>{user?.name}</h1>
     );
 };
 
