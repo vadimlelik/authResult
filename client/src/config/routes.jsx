@@ -4,13 +4,14 @@ import AuthLayout from "../layout/AuthLayout";
 import SignUpPage from "../pages/SignUpPage";
 import PostLayout from "../layout/PostLayout";
 import PostList from "../components/PostList";
+import Main from "../components/Main";
 
 
 export const routes = (isLoggedIn) => {
     return [
         {
             path: '/',
-            element: <h1>Home Page</h1>,
+            element: <Main/>
         },
         {
             path: 'auth',

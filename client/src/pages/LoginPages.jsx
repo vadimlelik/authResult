@@ -1,39 +1,46 @@
-import {useState} from "react";
 import {useDispatch} from "react-redux";
 import {useNavigate} from "react-router-dom";
+import styles from "./LoginPages.module.css";
 import {login} from "../store/authSlice";
+import {useForm} from 'react-hook-form'
+import {Button, FormControl, FormErrorMessage, FormLabel, Input, Text} from "@chakra-ui/react";
+import PasswordInput from "../components/PasswordInput";
 
 
 const LoginPages = () => {
-    const [data, setData] = useState({})
+    const {handleSubmit, register, formState: {errors}} = useForm()
     const dispatch = useDispatch();
     const navigate = useNavigate();
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        dispatch(login(data, navigate))
+    const onSubmit = async (e) => {
+        dispatch(login(e, navigate))
     }
-
-    const handleChange = (e) => {
-        const {name, value} = e.target
-        setData((prevState) => ({
-                ...prevState,
-                [name]: value
-            }
-        ))
-    }
-
     return (
-        <div>
-            <h1>SignUp</h1>
-            <form onChange={handleChange} style={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-            }}>
-                <input type="text" name='email' placeholder="Email address"/>
-                <input type="password" name='password' placeholder="Password"/>
-                <button type="submit" onClick={handleSubmit}>Sign Up</button>
+        <div className={styles.LoginPage}>
+            <Text fontSize='lg'>SignUp</Text>
+            <form onSubmit={handleSubmit(onSubmit)}>
+                <FormControl isInvalid={errors.name}>
+                    <FormLabel htmlFor='name'>Name</FormLabel>
+                    <Input
+                        id="name"
+                        placeholder="name"
+                        {...register("name", {
+                            required: "This is required",
+                            minLength: {value: 4, message: "Minimum length should be 4"}
+                        })}
+                    />
+                    {errors.name && (<FormErrorMessage>
+                        {errors.name.message}
+                    </FormErrorMessage>)}
+                </FormControl>
+                <PasswordInput placeholder="Password" errors={errors.name} {...register("password", {
+                    required: 'This is required', minLength: {
+                        value: 3, message: "Minimum length should be 4"
+                    }
+                })} />
+
+                <Button mt={4} colorScheme='teal' type='submit'>
+                    Submit
+                </Button>
             </form>
         </div>
     );

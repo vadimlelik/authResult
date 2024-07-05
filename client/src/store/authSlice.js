@@ -58,7 +58,7 @@ export const login = (payload, navigate) => async (dispatch, getState) => {
 export const logout = (navigate) => (dispatch, getState) => {
     localStorageService.removeAuthData()
     dispatch(userLoggedOut())
-    navigate('/signIn')
+    navigate('/auth/signUp')
 }
 
 export const signup = (payload, navigate) => async (dispatch, getState) => {
@@ -73,6 +73,8 @@ export const signup = (payload, navigate) => async (dispatch, getState) => {
     }
 }
 
+// selectors
 
+ export  const getIsLoggedIn = (state) => state.auth.isLoggedIn
 
 
