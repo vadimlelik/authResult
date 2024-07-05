@@ -6,7 +6,7 @@ const PasswordInput = forwardRef(({errors, ...props}, ref) => {
     const handleClick = () => setShow(!show)
     return (
         <FormControl isInvalid={errors}>
-            <FormLabel htmlFor='password'>Email</FormLabel>
+            <FormLabel htmlFor='password'>Password</FormLabel>
             <InputGroup size='md'>
                 <Input
                     pr='4.5rem'

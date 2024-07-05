@@ -1,10 +1,10 @@
 import {useDispatch} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import styles from "./LoginPages.module.css";
-import {login} from "../store/authSlice";
+import {login} from "../../store/authSlice";
 import {useForm} from 'react-hook-form'
 import {Button, FormControl, FormErrorMessage, FormLabel, Input, Text} from "@chakra-ui/react";
-import PasswordInput from "../components/PasswordInput";
+import PasswordInput from "../../components/PasswordInput";
 
 
 const LoginPages = () => {
