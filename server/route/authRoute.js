@@ -32,6 +32,7 @@ router.post('/signUp', async (req, res) => {
 			name,
 			password: hashedPassword,
 			email,
+			qualities:req.body.qualities,
 			role: [defaultRole._id],
 		})
 

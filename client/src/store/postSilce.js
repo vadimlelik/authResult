@@ -3,7 +3,7 @@ import httpClient from "../api/http";
 
 
 const initialState = {
-    isLoading: true,
+    isLoading: false,
     error: null,
     entities: []
 }

@@ -1,19 +1,28 @@
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {signup} from "../../store/authSlice";
 import {useNavigate} from "react-router-dom";
-import {useForm} from "react-hook-form";
+import {Controller, useForm} from "react-hook-form";
 import styles from "./SignUp.module.css";
 import {Button, FormControl, FormErrorMessage, FormLabel, Input, Text} from "@chakra-ui/react";
 import PasswordInput from "../../components/PasswordInput";
+import Select from "react-select";
+import {getQuality} from "../../store/qualitySlice";
 
 const SignUpPage = () => {
-    const {register, handleSubmit, formState: {errors}} = useForm()
-    const dispatch = useDispatch();
     const navigate = useNavigate();
+    const {register,control, handleSubmit, formState: {errors}} = useForm()
+    const dispatch = useDispatch();
+    const qualitiesList = useSelector(getQuality)
 
     const onSubmit = async (e) => {
-        dispatch(signup(e, navigate))
+        const data = {...e, qualities: e.qualities.map((q) => q.value)}
+        dispatch(signup(data))
+        // navigate('/')
     }
+    const options = qualitiesList?.map((option) => ({
+        value: option._id,
+        label: option.name,
+    }))
 
     return (
         <div className={styles.SignUpPage}>
@@ -56,7 +65,12 @@ const SignUpPage = () => {
                             {errors.name.message}
                         </FormErrorMessage>
                     )}
-
+                    <Controller
+                        name="qualities"
+                        control={control}
+                        render={({field}) => (
+                            <Select {...field} options={options} isMulti/>
+                        )}/>
                 </FormControl>
                 <Button mt={4} colorScheme='teal' type='submit'>Sign Up</Button>
             </form>
