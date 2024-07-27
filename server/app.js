@@ -10,6 +10,7 @@ import roleRoute from './route/roleRoute.js'
 import Role from './model/roleModel.js'
 import {initDataBase} from "./utils/initDataBase.js";
 import qualityRoute from "./route/qualityRoute.js";
+import {errorMiddleware} from "./middleware/error.middleware.js";
 
 const app = express()
 
@@ -22,6 +23,7 @@ app.use('/api/v1/quality',qualityRoute)
 app.use('/api/v1/users', userRoute)
 app.use('/api/v1/posts', postRoute)
 app.use('/api/v1/roles', roleRoute)
+app.use(errorMiddleware)
 
 const createDefaultRoles = async () => {
     const roles = await Role.find()
