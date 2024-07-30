@@ -6,7 +6,6 @@ import Main from "../components/Main";
 
 
 export const routes = () => {
-
     return [
         {
             path: '/',
@@ -24,7 +23,7 @@ export const routes = () => {
             path: 'post-list',
             element: <PostList/>,
             authOnly: true,
-            roles: ['admin','user'],
+            roles: ['admin','National Quality Representative'],
         },
         {
             path: '*',
