@@ -1,20 +1,21 @@
 import {useDispatch, useSelector} from "react-redux";
-import {logout} from "../store/authSlice";
-import {useNavigate} from "react-router-dom";
+import {getIdUser, logout} from "../store/authSlice";
+import {Navigate, useNavigate} from "react-router-dom";
 import {Button} from "@chakra-ui/react";
 import {getQualitiesByIds} from "../store/qualitySlice";
 
 const Main = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const id = useSelector(getIdUser)
     const user = useSelector((state) => state.auth.user)
     const qualities = useSelector(getQualitiesByIds(user?.qualities))
 
     const handleLogout = () => {
         dispatch(logout(navigate))
     }
-    if (!user) {
-        return <h1>Loading...</h1>
+    if (!id) {
+        return <Navigate to="/auth/sigin-up" />
     }
 
     return (
