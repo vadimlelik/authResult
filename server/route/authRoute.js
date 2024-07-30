@@ -11,7 +11,7 @@ router.post('/signUp', async (req, res) => {
 		const { email, password, name } = req.body
 		const existingUser = await User.findOne({ email })
 
-		const defaultRole = await Role.findOne({ name: 'user' })
+		const defaultRole = await Role.findOne()
 
 		if (!defaultRole) {
 			throw new Error('Default role not found')
