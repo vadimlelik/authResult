@@ -1,15 +1,15 @@
 import {Router} from 'express';
 import authMiddleware from "../middleware/auth.middleware.js";
+import Post from "../model/postModel.js";
 
 
 const router = new Router()
 
 router.get('/', authMiddleware, async (req, res) => {
-    console.log(req.user, 'req.user')
 
     try {
-        console.log('all good')
-        return res.status(200).json({message: 'success'})
+        const posts = await  Post.find()
+        return res.status(200).json(posts)
     } catch (e) {
         console.log(e)
     }
