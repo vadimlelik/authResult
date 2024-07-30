@@ -107,3 +107,5 @@ export const signup = (payload) => async (dispatch, getState) => {
 export const getIsLoggedIn = (state) => state.auth.isLoggedIn
 export const getAuthUserRole = (state)=>state.auth?.user?.role
 
+export const getIsLoadingAuth = (state) => state.auth.isLoading
+export const getIdUser = (state) => state.auth.auth.userId
