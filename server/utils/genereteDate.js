@@ -1,7 +1,13 @@
-import mongoose from "mongoose";
-import { faker } from '@faker-js/faker';
+import {faker} from "@faker-js/faker";
+import User from "../model/userModel.js";
+import Post from "../model/postModel.js";
+import Comment from "../model/commentModel.js";
+import Quality from "../model/qualityModel.js";
+import Role from "../model/roleModel.js";
+import Token from "../model/tokenModel.js";
 
-const generateFakeData = async () => {
+
+export const generateFakeData = async () => {
     try {
         // Очистка данных перед генерацией
         await User.deleteMany({});
@@ -15,7 +21,7 @@ const generateFakeData = async () => {
         const roles = [];
         for (let i = 0; i < 3; i++) {
             const role = new Role({
-                name: faker.name.jobTitle(),
+                name: faker.person.jobTitle(),
                 description: faker.lorem.sentence()
             });
             roles.push(await role.save());
@@ -23,7 +29,7 @@ const generateFakeData = async () => {
 
         // Генерация качеств
         const qualities = [];
-        for (let i = 0; i < 3; i++) {
+        for (let i = 0; i < 50; i++) {
             const quality = new Quality({
                 name: faker.lorem.word(),
                 description: faker.lorem.sentence()
@@ -33,19 +39,29 @@ const generateFakeData = async () => {
 
         // Генерация пользователей
         const users = [];
-        for (let i = 0; i < 10; i++) {
+        for (let i = 0; i < 100; i++) {
             const user = new User({
-                username: faker.internet.userName(),
+                name: faker.internet.userName(),
                 email: faker.internet.email(),
                 password: faker.internet.password(),
+                // post:post[Math.floor(Math.random()*post.length)]._id,
                 role: roles[Math.floor(Math.random() * roles.length)]._id,
-                quality: qualities[Math.floor(Math.random() * qualities.length)]._id
+                qualities: qualities[Math.floor(Math.random() * qualities.length)]._id
             });
             users.push(await user.save());
         }
 
+        // Генерация токенов для пользователей
+        // for (let i = 0; i < users.length; i++) {
+        //     const token = new Token({
+        //         token: faker.datatype.uuid(),
+        //         user: users[i]._id
+        //     });
+        //     await token.save();
+        // }
+
         // Генерация постов и комментариев
-        for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < 150; i++) {
             const post = new Post({
                 title: faker.lorem.sentence(),
                 content: faker.lorem.paragraph(),
@@ -67,9 +83,7 @@ const generateFakeData = async () => {
         }
 
         console.log('Fake data generated successfully!');
-        mongoose.disconnect();
     } catch (error) {
         console.error('Error generating fake data:', error);
-        mongoose.disconnect();
     }
 };
