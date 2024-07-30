@@ -4,24 +4,21 @@ import {fetchUsers} from '../store/usersSlice'
 import {fetchRole} from '../store/roleSlice'
 import {authMe} from "../store/authSlice";
 import {fetchQuality, isLoadingQuality} from "../store/qualitySlice";
-import {Navigate} from "react-router-dom";
+import {fetchPost} from "../store/postSilce";
 
 const AppLoader = ({children}) => {
+
     const dispatch = useDispatch()
     const isLoggedIn = useSelector((state) => state.auth.isLoggedIn)
-    const userStatusLoading = useSelector((state) => state.users.isLoading)
-    const user = useSelector((state) => state.auth.user)
-    const isAuthLoading = useSelector(state => state.auth.isLoading)
     const isLoadingQualitiesList = useSelector(isLoadingQuality)
-
 
     useEffect(() => {
         dispatch(fetchQuality())
-
         if (isLoggedIn) {
             dispatch(authMe())
             dispatch(fetchUsers())
             dispatch(fetchRole())
+            dispatch(fetchPost())
         }
     }, [isLoggedIn, dispatch])
 
