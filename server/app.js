@@ -11,6 +11,7 @@ import Role from './model/roleModel.js'
 import {initDataBase} from "./utils/initDataBase.js";
 import qualityRoute from "./route/qualityRoute.js";
 import {errorMiddleware} from "./middleware/error.middleware.js";
+import {generateFakeData} from "./utils/genereteDate.js";
 
 const app = express()
 
@@ -39,8 +40,9 @@ const createDefaultRoles = async () => {
 const start = async () => {
     try {
         mongoose.connection.once('open', async () => {
-            await initDataBase()
-            await createDefaultRoles()
+            await generateFakeData()
+            // await initDataBase()
+            // await createDefaultRoles()
         })
 
         await mongoose.connect('mongodb://localhost:27017/auth')
