@@ -40,4 +40,14 @@ export const fetchPost = () => async (dispatch, getState) => {
     }
 }
 
+export const getAllPosts = (state) => {
+    return state.posts.entities
+}
+
+export const getPostIsLoading = (state) => {
+    return state.posts.isLoading
+}
+export const  getPostIsError = (state) => {
+    return state.posts.error
+}
 
