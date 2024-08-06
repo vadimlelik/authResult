@@ -23,7 +23,7 @@ export const routes = () => {
             path: 'post-list',
             element: <PostList/>,
             authOnly: true,
-            roles: ['admin','National Quality Representative'],
+            roles: ['admin'],
         },
         {
             path: '*',
